@@ -3,7 +3,9 @@ import { getFrameMetadata } from "@coinbase/onchainkit";
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const name = "WavyJack";
+  const name = "BasedJack";
+  const description = "Play BasedJack, a Blackjack game on Farcaster Frames!";
+  const ogImage = `${process.env.NEXT_PUBLIC_URL}/api/getGameData`;
 
   const frameMetadata = getFrameMetadata({
     buttons: [
@@ -13,43 +15,48 @@ export async function generateMetadata(): Promise<Metadata> {
         target: `${process.env.NEXT_PUBLIC_URL}/api/startGame`,
       },
       {
-        label: `Stats`,
+        label: "Stats",
         action: "post",
         target: `${process.env.NEXT_PUBLIC_URL}/api/userStats`,
       },
       {
-        label: `Cast Game`,
+        label: "Cast Game",
         action: "link",
-        target: `https://warpcast.com/~/compose?text=%F0%9F%8E%89%F0%9F%94%A5+Check+out+this+WavyJack+game%2C+a+classic+blackjack+game+on+Farcaster+Frames!+%23wavyjack+%23blackjack+%F0%9F%83%8F%E2%9C%A8&embeds%5B%5D=${encodeURIComponent(process.env.NEXT_PUBLIC_URL || '')}`,
+        target: `https://warpcast.com/~/compose?text=${encodeURIComponent("🎰🔥 Check out BasedJack, a Blackjack game on Farcaster Frames! #basedjack #blackjack 🃏✨")}&embeds[]=${encodeURIComponent(process.env.NEXT_PUBLIC_URL || '')}`,
       },
       {
-        label: `Rules`,
+        label: "Rules",
         action: "post",
         target: `${process.env.NEXT_PUBLIC_URL}/api/rules`,
       },
     ],
-    image: `${process.env.NEXT_PUBLIC_URL}/api/getGameData`,
+    image: ogImage,
+    post_url: `${process.env.NEXT_PUBLIC_URL}/api/startGame`,
   });
 
   return {
     title: name,
-    description: "WavyJack game on Farcaster",
+    description: description,
     openGraph: {
       title: name,
-      description: "WavyJack game on Farcaster",
-      images: [`${process.env.NEXT_PUBLIC_URL}/download.jpg`],
+      description: description,
+      images: [ogImage],
     },
     other: {
       ...frameMetadata,
+      "fc:frame": "vNext",
+      "fc:frame:image": ogImage,
       "fc:frame:image:aspect_ratio": "1.91:1",
+      "fc:frame:post_url": `${process.env.NEXT_PUBLIC_URL}/api/startGame`,
     },
   };
 }
 
-export default function Page(): JSX.Element {
+export default function Home() {
   return (
     <div>
-      Paste this link on your warpcast and Cast it to play WavyJack!
+      <h1>Welcome to BasedJack!</h1>
+      <p>Cast this frame on Farcaster to start playing.</p>
     </div>
   );
 }
