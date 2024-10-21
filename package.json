@@ -1,0 +1,17 @@
+{
+  "name": "basedjack-app",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@coinbase/onchainkit": "^0.34.1",
+    "@vercel/og": "^0.6.3"
+  },
+  
